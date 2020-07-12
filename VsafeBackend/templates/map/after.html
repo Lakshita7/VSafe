@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+  <meta name="description" content="Alter the viewport  to ensure a group of objects are visible">
+  <title>SafeMap by VSafe</title>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.0/mapsjs-ui.css" />
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-core.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-service.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-ui.js"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.0/mapsjs-mapevents.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,,500,600,700" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'map/css/open-iconic-bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/animate.css' %}">
+
+  <link rel="stylesheet" href="{% static 'map/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/magnific-popup.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/ionicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/bootstrap-datepicker.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/jquery.timepicker.css' %}">
+
+  <link rel="stylesheet" href="{% static 'map/css/flaticon.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/icomoon.css' %}">
+  <link rel="stylesheet" href="{% static 'map/css/style.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/css/star-rating.min.css"
+  />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-star-rating/4.0.2/js/star-rating.min.js"></script>
+
+</head>
+
+<body>
+  <div class="w3-sidebar w3-bar-block w3-white w3-card" style="width:25%">
+    <h1 class="w3-bar-item w3-purple">VSafe</h1>
+    <div class="w3-dropdown-hover">
+      <button class="w3-button" style="font-size: 26px">Which area did you feel unsafe?
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="w3-dropdown-content w3-bar-block">
+        <a href="#" id="myBtn" style="font-size: 26px" class="w3-bar-item w3-button" onclick="return theFunction();">Electronic City</a>
+        <a href="#" id="myBtn" style="font-size: 26px" class="w3-bar-item w3-button" onclick="return theFunction();">Infosys Drive</a>
+        <a href="#" id="myBtn" style="font-size: 26px" class="w3-bar-item w3-button" onclick="return theFunction();">Hewlett Packard Avenue Road</a>
+        <a href="#" id="myBtn" style="font-size: 26px" class="w3-bar-item w3-button" onclick="return theFunction();">NH Service Road</a>
+        <a href="#" id="myBtn" style="font-size: 26px" class="w3-bar-item w3-button" onclick="return theFunction();">1st Cross Road</a>
+        <a href="#" id="myBtn" style="font-size: 26px" class="w3-bar-item w3-button" onclick="return theFunction();">Forum Mall</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" style="font-size: 24px">Rate the Road</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body" style="font-size: 20px">
+          <p>1 is least safe, 5 is most safe.</p>
+
+
+
+          <div class="rating-stars-container">
+            <form  method="post">
+              {% csrf_token %}
+              {{rating.rate}}
+              <input id="input-1" name="input-1" class="rating rating-loading" value="1" data-min="0" data-max="5" data-step="0.5" data-size="xs">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function theFunction() {
+      var modal = document.getElementById("myModal");
+      var span = document.getElementsByClassName("close")[0];
+      modal.style.display = "block";
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    }
+
+  </script>
+
+  <script>
+    $("#input-id").rating();
+    console.log($("#input-id").rating());
+  </script>
+  <div class="hero-wrap js-fullheight">
+    <div class="overlay"></div>
+    <div class="container-fluid px-0">
+      <div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-end">
+        <div id="heremap" style="width: 4000px; height: 1400px; background: grey"></div>
+        <div id="panel" style="width: 600px;"></div>
+        <script type="text/javascript" src="{% static 'map/js/app.js' %}"></script>
+      </div>
+    </div>
+  </div>
+  <!-- loader -->
+
+
+
+  <script src="{% static 'map/js/jquery.min.js' %}"></script>
+  <script src="{% static 'map/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'map/js/popper.min.js' %}"></script>
+  <script src="{% static 'map/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'map/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'map/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'map/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'map/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'map/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'map/js/aos.js' %}"></script>
+  <script src="{% static 'map/js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'map/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'map/js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'map/js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'map/js/google-map.js' %}"></script>
+  <script src="{% static 'map/js/main.js' %}"></script>
+
+</body>
+
+</html>

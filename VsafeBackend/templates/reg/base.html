@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <nav class='navbar navbar-default navbar-static-top'>
+      <div class="container">
+        <ul class = "nav navbar-nav">
+          <li><a class="navbar-link" href="{% url 'reg:register' %}">REGISTER</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li><a class="navbar-brand" href="{% url 'index' %}">HOME</a></li>
+
+          {% else %}
+            <li><a href="{% url 'reg:user_login' %}">LOGIN</a></li>
+            <li><a href="{% url 'reg:user_login' %}">HOME</a></li>
+          {% endif %}
+        </ul>
+
+      </div>
+
+    </nav>
+    <div class="container">
+      {% block body_block %}
+      {% endblock %}
+
+    </div>
+  </body>
+</html>
